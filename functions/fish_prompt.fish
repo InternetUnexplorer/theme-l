@@ -8,6 +8,7 @@ function _is_git_dirty
 end
 
 function fish_prompt
+  set -l purple (set_color purple)
   set -l blue (set_color blue)
   set -l green (set_color green)
   set -l normal (set_color normal)
@@ -25,5 +26,10 @@ function fish_prompt
     end
   end
 
-  echo -n -s $cwd $git_info $normal ' ' $arrow ' '
+  if [ $SHLVL -gt 1 ]
+      set nested $purple(math $SHLVL - 1)
+      set nested "$nested "
+  end
+
+  echo -n -s $nested $cwd $git_info $normal ' ' $arrow ' '
 end
