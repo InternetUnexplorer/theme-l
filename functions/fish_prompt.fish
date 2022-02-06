@@ -27,9 +27,12 @@ function fish_prompt
   end
 
   if [ $SHLVL -gt 1 ]
-      set nested $purple(math $SHLVL - 1)
-      set nested "$nested "
+    set nested $purple(math $SHLVL - 1)' '
   end
 
-  echo -n -s $nested $cwd $git_info $normal ' ' $arrow ' '
+  if set -q SSH_CLIENT; or set -q SSH_TTY
+    set remote $purple'('(echo $hostname)') '
+  end
+
+  echo -n -s $remote $nested $cwd $git_info $normal ' ' $arrow ' '
 end
