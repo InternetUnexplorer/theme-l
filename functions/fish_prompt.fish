@@ -31,7 +31,7 @@ function fish_prompt
   end
 
   if set -q SSH_CLIENT; or set -q SSH_TTY
-    set remote $purple'('(echo $hostname)') '
+    set remote $purple'('(hostname -s)') '
   end
 
   echo -n -s $remote $nested $cwd $git_info $normal ' ' $arrow ' '
